@@ -1,0 +1,449 @@
+/* ==========================
+   Dark Luxury Theme - Full CSS
+   Version: Final (Complete)
+   Paste into style.css
+   ========================== */
+
+/* ==========================
+   Root variables
+   ========================== */
+:root{
+  --bg-dark:#06070a;
+  --panel:#0f1114;
+  --muted:#9aa1a8;
+  --accent:#a94a3b;
+  --accent-2:#ff9d84;
+  --glass: rgba(255,255,255,0.05);
+  --glass-2: rgba(255,255,255,0.03);
+  --card-bg: rgba(14,15,17,0.65);
+  --max-w:1180px;
+  --radius:14px;
+  --shadow-1: 0 10px 30px rgba(0,0,0,0.55);
+  --shadow-2: 0 26px 80px rgba(0,0,0,0.75);
+  --transition-fast: .25s ease;
+  --transition-mid: .45s cubic-bezier(.2,.9,.2,1);
+}
+
+/* ==========================
+   Reset & Base
+   ========================== */
+* { box-sizing: border-box; }
+html,body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg-dark);
+  color: #e9edf1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  overflow-y: auto;
+  -webkit-font-kerning: normal;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ==========================
+   Cinematic Background
+   ========================== */
+.bg-wrap { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.bg-image {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(180deg, rgba(10,12,14,0.65), rgba(7,8,10,0.8)),
+    url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=60');
+  background-size: cover;
+  background-position: center;
+  filter: contrast(.92) brightness(.62);
+  transform: scale(1.05);
+  transition: transform 0.6s ease;
+}
+.bg-gradient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(800px 300px at 10% 20%, rgba(169,74,59,0.12), transparent 10%), linear-gradient(180deg, rgba(25,20,30,0.25), rgba(8,8,10,0.5));
+  mix-blend-mode: overlay;
+}
+.overlay { position: fixed; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.45)); z-index:1; pointer-events:none; }
+
+/* ==========================
+   Container
+   ========================== */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 22px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================
+   Header / Nav
+   ========================== */
+.site-header {
+  position: fixed;
+  top: 18px;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.header-inner {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 10px 18px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  pointer-events: auto;
+}
+.brand-top { display: flex; flex-direction: column; }
+.brand-name {
+  font-family: Poppins, system-ui, sans-serif;
+  font-weight: 700;
+  margin: 0;
+  font-size: 16px;
+  color: #fff;
+}
+.role { color: var(--muted); font-size: 12px; margin-top: 4px; }
+
+/* Nav */
+.nav { display: flex; gap: 14px; align-items: center; }
+.nav-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: all .22s ease;
+}
+.nav-link:hover { color: #fff; background: rgba(255,255,255,0.03); transform: translateY(-3px); }
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 700;
+}
+.btn-ghost:hover {
+  background: linear-gradient(90deg, rgba(169,74,59,0.12), rgba(240,160,140,0.06));
+  transform: translateY(-3px);
+  color: #fff;
+}
+
+/* Mobile toggle */
+.mobile-toggle { display: none; background: transparent; border: 0; color: #fff; font-size: 18px; }
+
+/* ==========================
+   Sections
+   ========================== */
+.section { padding: 120px 0; position: relative; z-index: 2; }
+.section-title {
+  font-family: Poppins, sans-serif;
+  font-size: 28px;
+  margin: 0 0 22px;
+  letter-spacing: 0.6px;
+}
+.sec-num {
+  color: var(--accent);
+  margin-right: 12px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* ==========================
+   Hero
+   ========================== */
+.hero-grid { display: grid; grid-template-columns: 1fr 360px; gap: 28px; align-items: start; }
+.eyebrow { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+.hero-title {
+  font-family: Poppins, sans-serif;
+  font-size: 36px;
+  margin: 0 0 12px;
+  line-height: 1.05;
+}
+.accent {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+.lead { color: var(--muted); font-size: 15px; max-width: 58ch; margin-top: 6px; }
+.hero-ctas { margin-top: 18px; display: flex; gap: 12px; align-items: center; }
+.btn {
+  padding: 10px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 700;
+  border: 0;
+  cursor: pointer;
+}
+.btn.primary {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: #fff;
+  box-shadow: 0 12px 30px rgba(169,74,59,0.14);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.btn.primary:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(169,74,59,0.18); }
+.btn.outline {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--muted);
+}
+
+/* Meta list */
+.meta-list { margin-top: 18px; color: var(--muted); font-size: 14px; padding-left: 18px; }
+
+/* ==========================
+   Premium Glass Card (global upgrade)
+   ========================== */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 18px;
+  padding: 24px 26px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    inset 0 0 18px rgba(255, 255, 255, 0.04);
+
+  transition: all .35s ease;
+}
+.glass-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 26px 80px rgba(0, 0, 0, 0.75),
+    inset 0 0 24px rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* internal text styling for glass */
+.glass-card .card-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: #fff;
+  letter-spacing: 0.4px;
+}
+.glass-card p,
+.glass-card li {
+  color: #d1d1d1;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.glass-card strong { color: #fff; }
+
+/* links inside cards */
+.glass-card a {
+  color: #ffb29f;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color .25s ease;
+}
+.glass-card a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255, 180, 150, 0.4);
+}
+
+/* ==========================
+   About Section
+   ========================== */
+.about-grid { display: grid; grid-template-columns: 1fr 320px; gap: 20px; align-items: start; }
+.about-left h4 { margin-top: 0; }
+.about-journey ul { margin: 8px 0 0 18px; color: #d1d1d1; }
+
+/* ==========================
+   Projects - Fancy Cards
+   ========================== */
+.projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 18px; }
+.project-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: linear-gradient(180deg, rgba(14,15,17,0.65), rgba(10,11,12,0.45));
+  transition: transform .45s cubic-bezier(.2,.9,.25,1), box-shadow .45s ease, filter .45s ease;
+}
+.project-card:hover { transform: translateY(-12px) scale(1.01); box-shadow: 0 30px 70px rgba(0,0,0,0.6); filter: grayscale(0); }
+.project-media { position: relative; overflow: hidden; height: 220px; }
+.project-media img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.05); transition: transform 1.2s ease, filter .6s ease; }
+.project-card:hover .project-media img { transform: scale(1.12); filter: brightness(.95) contrast(1.02); }
+.media-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.35)); pointer-events: none; }
+
+.project-content { padding: 16px; }
+.project-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.project-head h4 { margin: 0; font-size: 18px; color: #fff; }
+.pill { background: rgba(255,255,255,0.03); padding: 6px 10px; border-radius: 999px; font-size: 12px; color: var(--muted); }
+.proj-desc { color: var(--muted); margin: 12px 0 14px; }
+.project-meta { display: flex; justify-content: space-between; align-items: center; }
+.tags span { display: inline-block; background: rgba(255,255,255,0.02); padding: 6px 10px; border-radius: 10px; margin-right: 8px; font-size: 12px; color: var(--accent); }
+.proj-links a { color: var(--accent); text-decoration: none; font-weight: 700; margin-left: 12px; }
+.proj-links a:hover { text-decoration: underline; }
+
+/* subtle micro-hover glow / border for project cards */
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(169,74,59,0);
+  transition: box-shadow .45s ease;
+}
+.project-card:hover::after {
+  box-shadow: 0 0 60px rgba(169,74,59,0.06);
+}
+
+/* ==========================
+   Skills
+   ========================== */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 14px; }
+.skill {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.skill-head { display: flex; justify-content: space-between; align-items: center; }
+.meter { height: 10px; background: rgba(255,255,255,0.03); border-radius: 999px; margin-top: 10px; overflow: hidden; }
+.meter-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .9s cubic-bezier(.2,.9,.2,1); }
+
+/* ==========================
+   Contact Section (no form) & Right mini-cards
+   ========================== */
+.contact-grid { display: grid; grid-template-columns: 1fr 320px; gap: 18px; align-items: start; margin-top: 14px; }
+.contact-large { padding: 22px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.04); background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow: var(--shadow-1); }
+.contact-actions { margin-top: 12px; display: flex; gap: 12px; align-items: center; }
+
+/* mini-cards (contact info blocks) */
+.mini-card {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 18px 20px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all .3s ease;
+}
+.mini-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* links row */
+.links-row { margin-top: 16px; display: flex; gap: 12px; }
+.links-row a { color: #ffb29f; text-decoration: none; font-weight: 700; }
+.links-row a:hover { color: #fff; text-shadow: 0 0 8px rgba(255,180,150,0.3); }
+
+/* ==========================
+   Contents Card Styling (list inside glass card)
+   ========================== */
+.contents { list-style: none; padding: 0; margin: 0; }
+.contents li {
+  color: #d9d9d9;
+  padding: 8px 0;
+  font-size: 15px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border-bottom: 1px dashed rgba(255,255,255,0.02);
+}
+.contents li:last-child { border-bottom: none; }
+.contents .num {
+  color: var(--accent);
+  font-weight: 700;
+  width: 36px;
+  text-align: left;
+  display: inline-block;
+}
+
+/* ==========================
+   Footer
+   ========================== */
+.site-footer { padding: 30px 0; color: var(--muted); text-align: center; border-top: 1px solid rgba(255,255,255,0.02); }
+
+/* ==========================
+   Animations & Reveal (IntersectionObserver)
+   ========================== */
+.anim { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.9,.2,1); will-change: transform, opacity; }
+.anim.in-view { opacity: 1; transform: translateY(0); }
+
+/* subtle focus outlines and accessibility */
+a:focus, button:focus { outline: 3px solid rgba(255,180,150,0.12); outline-offset: 3px; }
+
+/* ==========================
+   Responsive Rules
+   ========================== */
+@media (max-width: 980px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .hero-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-grid { grid-template-columns: 1fr; }
+  .nav { display: none; }
+  .mobile-toggle { display: block; }
+  .header-inner { padding: 10px; }
+  .container { padding: 0 18px; }
+}
+
+@media (max-width: 560px) {
+  .skills-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: 28px; }
+  .glass-card { padding: 18px; }
+  .header-inner { padding: 8px; }
+  .brand-name { font-size: 55px; }
+}
+
+/* ==========================
+   Utility helpers
+   ========================== */
+.text-muted { color: var(--muted); }
+.text-accent { color: var(--accent); }
+.row { display:flex; gap:12px; align-items:center; }
+
+/* ==========================
+   Small polish: interactive micro copy styles
+   ========================== */
+.proj-links a { position: relative; transition: color .22s ease; }
+.proj-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 2px;
+  width: 0;
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  transition: width .28s ease;
+}
+.proj-links a:hover::after { width: 100%; }
+
+/* ==========================
+   Notes & Fallbacks for older browsers
+   ========================== */
+/* If backdrop-filter unsupported, slightly increase card opacity for readability */
+@supports not ((-webkit-backdrop-filter: blur(14px)) or (backdrop-filter: blur(14px))) {
+  .glass-card, .mini-card {
+    background: rgba(18,18,20,0.64);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+}
+
+/* ==========================
+   End of CSS
+   ========================== */
