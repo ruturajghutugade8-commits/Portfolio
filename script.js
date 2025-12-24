@@ -1,7 +1,10 @@
 // Page interactions, animations, and small parallax
 document.addEventListener("DOMContentLoaded", () => {
   // Set year
-  document.getElementById("year").textContent = new Date().getFullYear();
+  const yearEl = document.getElementById("year");
+  if (yearEl) {
+    yearEl.textContent = new Date().getFullYear();
+  }
 
   // IntersectionObserver reveal
   const obs = new IntersectionObserver(
@@ -39,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (bg) bg.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
   });
 
+  // External links handlers
   window.openDemo = function (e) {
     e.preventDefault();
     const url = e.target.getAttribute("href");
@@ -58,9 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Mobile nav toggle
   const mobileToggle = document.getElementById("mobileToggle");
   const nav = document.querySelector(".nav");
-  mobileToggle &&
+  if (mobileToggle && nav) {
     mobileToggle.addEventListener("click", () => {
-      if (!nav) return;
       if (nav.style.display === "flex") {
         nav.style.display = "";
       } else {
@@ -76,6 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
         nav.style.boxShadow = "0 12px 40px rgba(0,0,0,0.6)";
       }
     });
+  }
 
   // Animate skill meters once in view
   const skillsObserver = new IntersectionObserver(
@@ -97,4 +101,44 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .querySelectorAll(".skills-grid")
     .forEach((el) => skillsObserver.observe(el));
+
+  // ================== IMAGE FULLSCREEN OVERLAY ==================
+  const overlay = document.getElementById("imgOverlay");
+  const overlayImg = document.getElementById("overlayImg");
+  const closeBtn = overlay ? overlay.querySelector(".close-btn") : null;
+
+  if (overlay && overlayImg && closeBtn) {
+    // Open fullscreen image on project image click
+    document.querySelectorAll(".project-img").forEach((img) => {
+      img.style.cursor = "zoom-in"; // UX hint
+      img.addEventListener("click", () => {
+        overlayImg.src = img.src;
+        overlay.classList.add("show");
+      });
+    });
+
+    // Close on button click
+    closeBtn.addEventListener("click", () => {
+      overlay.classList.remove("show");
+      overlayImg.src = "";
+    });
+
+    // Close on background click
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) {
+        overlay.classList.remove("show");
+        overlayImg.src = "";
+      }
+    });
+
+    // Close on ESC key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && overlay.classList.contains("show")) {
+        overlay.classList.remove("show");
+        overlayImg.src = "";
+      }
+    });
+  } else {
+    console.warn("Image overlay elements not found in DOM.");
+  }
 });
